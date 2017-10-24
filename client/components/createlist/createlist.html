@@ -12,11 +12,11 @@
     <!-- hide here -->
     <span layout="column" ng-hide="createdNow" layout-fill>
     <md-input-container flex="100"  md-no-float class="md-block" style="margin: 10px 0 !important;">
-        <input ng-model="create.register.productName" aria-label="productName" type="text" placeholder="Product Name" required>
+        <input ng-model="productName" aria-label="productName" type="text" placeholder="Product Name" required>
     </md-input-container>
     </span>          
     <!-- hide here -->
-    <span layout="row" flex ng-hide="createdNow" >
+    <span layout="row" flex ng-hide="createdNow" ng-if="productName">
       <md-button md-no-ink class="md-primary" ngf-select="uploadFiles($file, $invalidFiles)" aria-label="transfer" ngf-max-height="1000">
         Upload CSV template
       </md-button>
@@ -34,12 +34,7 @@
       <p>
         A new list named <b>{{registered.productName}} </b> has been created
       </p>
-      </span>
-      <span layout="row" layout-align="start start" layout-fill>
-      <p>
-        Field is <b>{{registered.field}}</b>
-      </p>
-    </span>
+      </span>      
     </span>
   </md-dialog-content>
     <md-dialog-actions >

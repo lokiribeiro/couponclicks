@@ -1,5 +1,5 @@
 import {app} from '/client/app.js';
-import Projects from '/imports/models/projects.js';
+import Lists from '/imports/models/lists.js';
 
 class DashboardCtrl{
 
@@ -63,15 +63,17 @@ class DashboardCtrl{
 
       $scope.userId = Meteor.userId();
       $scope.sort = 1;
-      $scope.subscribe('projects');
+      $scope.subscribe('lists');
 
       $scope.helpers({
-        projects(){
+        lists(){
           var selector = {};
-          var projects =  Projects.find(selector);
-          console.log(projects);
+          var lists =  Lists.find();
+          console.info('lists', lists);
+          var count = lists.count();
+          console.info('listCount', count);
           //themeProvider.setDefaultTheme(statehold);
-          return projects;
+          return lists;
         }
 
       });//helpers
@@ -84,12 +86,12 @@ class DashboardCtrl{
       }
 
       $scope.items = [
-        { name: "Add project", icon: "../../assets/img/white_roleadd24.svg", direction: "left" }
+        { name: "Add list", icon: "../../assets/img/white_roleadd24.svg", direction: "left" }
       ];
 
       $scope.openDialog = function($event, item) {
       // Show the dialog
-      if(item.name == 'Add project'){
+      if(item.name == 'Add list'){
       $mdDialog.show({
         clickOutsideToClose: false,
         escapeToClose: true,

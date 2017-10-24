@@ -5,13 +5,14 @@ import Papa from '/imports/ui/papaparse.js';
 
 class CreatelistCtrl{
 
-  constructor($scope, $timeout, $reactive, $mdSidenav, $log, $mdDialog, $state, Upload){
+  constructor($scope, $timeout, $reactive, $mdSidenav, $log, $mdDialog, $state, Upload, $rootScope){
       'ngInject';
 
 
 
       //helpers
       this.$state = $state;
+      $scope.userID = $rootScope.userID;
 
       $reactive(this).attach($scope);
 
@@ -39,37 +40,29 @@ class CreatelistCtrl{
 
       this.error = '';
 
-      //var details = this.credentials;
-      $scope.productName = this.register;      
+      $scope.productName = ''
 
-      $scope.createList = function(details, index) {
+      //var details = this.credentials;
+           
+
+      $scope.createList = function(details, index) {        
+        console.info('product name', $scope.productName);
         var detail = details;
         $scope.indexPoint = index;
         console.info('detail from for loop', detail.email);
 
         console.info('detail', details);       
         //var status = createUserFromAdmin(details);
-
-        var list = [];
-
-        list.product_name = $scope.productName;       
-        list.coupon_code = details.couponcode;
-        list.date = new Date();
-
-        var status = Lists.insert(list);
-        if (status) {
-          $scope.registered = details;
-         
-
-         } else {
-           //do something with the id : for ex create profile
-           //$scope.done = false;
-           //$scope.createdNow = !$scope.createdNow;
-           //$scope.existing = true;
-           //window.setTimeout(function(){
-           //$scope.$apply();
-         //},2000);
-        }
+        var couponCode = details.couponcode;
+        if(couponCode){
+           Meteor.call('upsertCode', couponCode, $scope.listID, function(err, result) {
+               if (err) {
+                 console.log('success upsertCode');
+              } else {
+                 console.log('error upsertCode');                
+              }
+            });
+        }       
         console.info('indexPoint', $scope.indexPoint);
         console.info('arrayLength', parseInt($scope.arrayLength) - 1);
         if($scope.indexPoint == (parseInt($scope.arrayLength) - 1))
@@ -105,6 +98,26 @@ class CreatelistCtrl{
       var requirementID = reqID;
       $scope.done = true;
       if (file) {
+        console.info('userID', $scope.userID);
+        var list = [];
+
+        list.product_name = $scope.productName;               
+        list.userID = $scope.userID;
+        list.date = new Date();
+
+        var status = Lists.insert(list);
+        if (status) {
+          $scope.listID = status;
+          console.info('listID', $scope.listID);         
+         } else {
+           //do something with the id : for ex create profile
+           //$scope.done = false;
+           //$scope.createdNow = !$scope.createdNow;
+           //$scope.existing = true;
+           //window.setTimeout(function(){
+           //$scope.$apply();
+         //},2000);
+        }
         console.log(file);
         $scope.fileCSV = file;
 
