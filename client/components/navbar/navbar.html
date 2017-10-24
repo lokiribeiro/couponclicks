@@ -1,19 +1,19 @@
 <div layout="row" flex>
-  <md-toolbar class="md-primary toolbars" md-scroll-shrink ng-if="true" >
+  <md-toolbar style="background-color: rgb(255, 255, 255) !important; transform: translate3d(0px, 0px, 0px);" class="md-primary toolbars" md-scroll-shrink ng-if="true" >
       <div class="md-toolbar-tools" >
-        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()"
+        <md-button ng-if="$root.userLoggedIn" class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()"
             ng-hide="isOpenLeft()">
           <md-icon md-svg-icon="../../assets/img/white_menu.svg"></md-icon>
         </md-button>
         <span flex="50" layout-align="center center">
-          <h3 style="margin: 0px;">Task Manager</h3>
+          <a href="/"><h3 style="margin: 0px; color: #555 !important;">Amazon Coupon</h3></a>
         </span>
-        <span flex></span>
-        <md-menu md-position-mode="target-right target"  md-offset="0 30">
+        <span flex></span>        
+        <md-menu ng-if="$root.userLoggedIn" md-position-mode="target-right target"  md-offset="0 30">
           <md-card-avatar ng-click="$mdOpenMenu($event)" >
             <md-tooltip md-direction="bottom">
               My Profile
-            </md-tooltip>
+            </md-tooltip>          
           <img ng-repeat="profile in profiles" class="avatar-2 img-responsive" ng-src="{{profile.profiles_profilephoto}}" >
           </md-card-avatar>
           <md-menu-content width="3" >
@@ -35,6 +35,22 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
+        <span ng-hide="$root.userLoggedIn" layout-align="center right">
+          <a  href="/register">
+          <md-button type="submit" class="md-primary" md-noink aria-label="login" ng-disabled="login.loginForm.$invalid()">
+            <md-icon md-svg-icon="../../assets/img/indigo_edit24.svg" style="margin: auto 3px auto 0;"></md-icon>
+            Sign Up
+          </md-button>
+          </a>
+        </span>
+        <span ng-hide="$root.userLoggedIn" layout-align="center right">
+          <a  href="/login">
+          <md-button type="submit" class="md-primary" md-noink aria-label="login" ng-disabled="login.loginForm.$invalid()">
+            <md-icon md-svg-icon="../../assets/img/indigo_login24.svg" style="margin: auto 3px auto 0;"></md-icon>
+            Log in
+          </md-button>
+          </a>
+        </span>              
       </div>
     </md-toolbar>
     <md-content></md-content>

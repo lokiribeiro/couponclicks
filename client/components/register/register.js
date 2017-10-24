@@ -8,6 +8,7 @@ class RegisterCtrl{
         'ngInject';
 
         this.$state = $state;
+        $scope.confirmPass = '';
 
         $reactive(this).attach($scope);
 
@@ -17,8 +18,7 @@ class RegisterCtrl{
         };
 
         $scope.profile = {
-          firstname: '',
-          lastname: ''
+          firstname: ''
         }
 
         this.error = '';
@@ -33,10 +33,12 @@ class RegisterCtrl{
 
         $scope.registerUser = function(details, profiles) {
           console.log('heya:' + profiles.firstname);
+          if($scope.confirmPass == details.password) {
+          $scope.register.error = '';
           $scope.done = true;
           $scope.existing = false;
           $scope.createdNow = !$scope.createdNow;
-
+          
           Meteor.call('createUserFromAdmin', details.email, details.password, function(err, detail) {
                 var detail = detail;
                 var newuserID = detail;
@@ -68,6 +70,11 @@ class RegisterCtrl{
                  },2000);
                  }
               });
+          } else {
+            $scope.register.error = "Password does not match";
+          }
+
+
         };
 
         $scope.logout = function() {
@@ -78,7 +85,7 @@ class RegisterCtrl{
       $scope.createProfile = function (newUserID, profileDetails, profile) {
                 console.log(newUserID);
                 //console.log(profileDetails.emails[0].address);
-                var userFirstname = profile.firstname + ' ' + profile.lastname;
+                var userFirstname = profile.firstname;
                 console.info('userFirstname', userFirstname);
 
                 var profile = [];

@@ -11,9 +11,10 @@ import ngAnimate from 'angular-animate';
 import '../imports/ui/anim-in-out.js';
 import 'angularjs-social-login';
 import mdDataTable from 'angular-material-data-table';
+import ngFileUpload from 'ng-file-upload';
 
 export var app = angular.module('taskManager',
-    [angularMeteor, ngMaterial, uiRouter, 'accounts.ui', ngAnimate, 'anim-in-out', 'socialLogin', mdDataTable]).value('THROTTLE_MILLISECONDS', 250);
+    [angularMeteor, ngMaterial, uiRouter, 'accounts.ui', ngAnimate, 'anim-in-out', 'socialLogin', mdDataTable, ngFileUpload]).value('THROTTLE_MILLISECONDS', 250);
 
 app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdThemingProvider, $mdIconProvider, $provide, socialProvider) {
     'ngInject';
@@ -24,7 +25,7 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
     $stateProvider
     .state(
         'login', {
-            url:'/',
+            url:'/login',
             template: '<login></login>',
             resolve: {
                 currentUser($q, $state) {
@@ -36,6 +37,20 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
                 }
               }
     })
+    .state(
+        'home', {
+            url:'/',
+            template: '<home></home>',
+            resolve: {
+                currentUser($q, $state) {
+                    if (!Meteor.userId()) {
+                      return $q.resolve();
+                    } else {
+                      return $q.reject('LOGGED_IN');
+                    };
+                }
+              }
+    })    
     .state(
         'signin', {
             url:'/signin',

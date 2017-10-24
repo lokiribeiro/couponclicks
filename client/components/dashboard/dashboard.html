@@ -28,8 +28,8 @@
       </md-card> -->
     </div>
     <div layout="row" layout-align="center center" layout-padding layout-wrap layout-fill style="padding-bottom: 32px; padding-top: 10px;" ng-cloak>
-      <h1 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">Existing Projects </h1>
-      <h3 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">Browse through some existing projects</h3>
+      <h1 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">My Lists</h1>
+      <h3 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">Explanation on how to use here</h3>
       <md-card  ng-repeat="project in projects" ng-click="projected(project._id)"  class="card-1"  flex-gt-sm="50" flex-gt-md="30" layout-wrap layout-fill style="margin: 10px 10px 0 0;" ng-hide="$root.userLoggedInProject == project._id" ng-cloak>
         <md-card-title ng-cloak>
           <md-card-title-text>
@@ -57,7 +57,7 @@
   </div>
 </md-content>
 
-<div ng-cloak ng-show="$root.userLoggedInRole == 'superadmin'">
+<div ng-cloak>
 <md-fab-speed-dial ng-hide="demo.hidden" md-direction="up" md-scale md-open="demo.isOpen"
                        class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': demo.hover }"
                        ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false" ng-cloak style="position: fixed !important;">
@@ -73,7 +73,7 @@
                      ng-click="openDialog($event, item)">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">
-              New Project
+              New List
             </md-tooltip>
             <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
           </md-button>

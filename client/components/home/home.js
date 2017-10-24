@@ -1,0 +1,68 @@
+import {app} from '/client/app.js';
+
+import { name as Register } from '../register/register';
+
+
+class HomeCtrl {
+
+  constructor($scope, $reactive, $rootScope, $state){
+    'ngInject';
+
+     $('body').addClass('loginP');
+
+    this.$state = $state;
+
+    $scope.loginerror = '';
+
+    $reactive(this).attach($scope);
+
+    this.credentials = {
+      username: '',
+      password: ''
+    };
+
+    this.error = '';
+
+    $log = this.credentials;
+
+    $scope.login = function($log) {
+    Meteor.loginWithPassword($log.username, $log.password,
+      this.$bindToContext((err) => {
+        if (err) {
+          $scope.loginerror = err.reason;
+              console.info('err: ' ,   $scope.loginerror );
+          } else {
+            $state.go('Dashboard', { userID : Meteor.userId(), stateHolder : 'Dashboard' });
+          }
+        })
+      );
+    }
+
+    $scope.onSignIn = function (googleUser) {
+      var id_token = googleUser.getAuthResponse().id_token;
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+    };
+
+    $scope.signOut = function() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  };
+
+  $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
+    console.info('userDetails', userDetails);
+  })
+
+  }
+}
+
+app.component('home', {
+  templateUrl: 'client/components/home/home.html',
+  controllerAs: 'home',
+  controller: HomeCtrl
+});

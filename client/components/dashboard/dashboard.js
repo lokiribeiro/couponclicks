@@ -101,9 +101,9 @@ class DashboardCtrl{
             $mdDialog.cancel();
           };
         },
-        controllerAs: 'createproject',
+        controllerAs: 'createlist',
         controller: DashboardCtrl,
-        template: '<createproject></createproject>',
+        template: '<createlist></createlist>',
         targetEvent: $event
       });
       }

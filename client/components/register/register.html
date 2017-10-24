@@ -1,4 +1,4 @@
-<div flex-md layout-align="center center" class="slide smooth">
+<div flex-md layout-align="center center" class="slide smooth" style="margin-top: 20px;">
   <div flex layout="row" layout-align="center none" layout-wrap>
       <md-card class="card card-1">
         <md-card-content>
@@ -6,23 +6,17 @@
             <!-- <img class="img-responsive" src="../../assets/img/apeclogo.png"> -->
             <div layout="row" flex>
       <h2 style="font-weight:normal; margin-top: 0px !important;" ng-hide="createdNow">Register a new account</h2>
-      <h2 style="font-weight:normal" ng-if="done">Creating new user</h2>
-      <h2 style="font-weight:normal" ng-if="createdNows"><md-icon md-svg-icon="../../assets/img/indigo_check24.svg" style="margin: auto 3px auto 0;" ></md-icon> Check your email to verify your account</h2>
+      <h2 style="font-weight:normal" ng-if="done">Creating Account</h2>
+      <h2 style="font-weight:normal" ng-if="createdNows"><md-icon md-svg-icon="../../assets/img/indigo_check24.svg" style="margin: auto 3px auto 0;" ></md-icon> Account has been successfully created</h2>
       <span flex></span>
     </div>
     <md-progress-circular md-mode="indeterminate" ng-show="done" ></md-progress-circular>
             <md-input-container class="md-block" layout-fill ng-hide="createdNow">
               <label>
-                Firstname
+                Fullname
               </label>
               <input type="text" ng-model="profile.firstname" aria-label="email" required/>
-            </md-input-container>
-            <md-input-container class="md-block" layout-fill ng-hide="createdNow">
-              <label>
-                Lastname
-              </label>
-              <input type="text" ng-model="profile.lastname" aria-label="email" required/>
-            </md-input-container>
+            </md-input-container>            
             <md-input-container class="md-block" layout-fill ng-hide="createdNow">
               <label>
                 Email
@@ -34,6 +28,12 @@
                 Password
               </label>
               <input type="password" ng-model="register.credentials.password" aria-label="password" required/>
+            </md-input-container>
+            <md-input-container class="md-block" layout-fill ng-hide="createdNow">
+              <label>
+                Confirm Password
+              </label>
+              <input type="password" ng-model="confirmPass" aria-label="password" required/>
             </md-input-container>
             <div layout="row" layout-align="space-between center" layout-fill ng-hide="createdNow">
               <md-button type="submit" class="md-raised md-primary" layout-fill aria-label="login" ng-disabled="register.registerForm.$invalid()">Register
@@ -57,7 +57,7 @@
           <img alt="Squala Apps" style="width:230px; height:23px" class="img-responsive text-center" src="../../assets/img/wlogostrip_230x17_1x.png" />
       </div>-->
       <div layout="row" layout-align="center end">
-        <small class="text-muted">Task Manager &copy; 2017</small>
+        <small class="text-muted">Amazon Coupon &copy; 2017</small>
       </div>
     </div>
 </div>
