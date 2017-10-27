@@ -1,11 +1,9 @@
 import {app} from '/client/app.js';
 
 import Profiles from '/imports/models/profiles.js';
-import Projects from '/imports/models/projects.js';
-import Tasks from '/imports/models/tasks.js';
+import Lists from '/imports/models/lists.js';
 
-
-class TasklistCtrl{
+class CouponcodesCtrl{
 
   constructor($scope, $timeout, $mdSidenav, $element, $log, $mdDialog, $state, $q, $mdToast, $rootScope){
       'ngInject';
@@ -13,9 +11,9 @@ class TasklistCtrl{
       $scope.taskID = null;
 
       $scope.selected2 = [];
-      $scope.projectID = $rootScope.projectID;
-      console.info('projectID', $scope.projectID );
-      var projectID =   $scope.projectID ;
+      $scope.listID = $rootScope.listID;
+      console.info('listID', $scope.listID );
+      var listID =   $scope.listID ;
 
       $scope.show = false;
 
@@ -34,36 +32,31 @@ class TasklistCtrl{
 
       $scope.sort2 = 1;
       $scope.enabled = [];
-      $scope.installed = [];
-
-      $scope.subscribe('tasks2', function () {
-          return [$scope.getReactively('taskID')];
-      });
+      $scope.installed = [];      
 
       $scope.subscribe('users');
-      $scope.subscribe('projects');
+      $scope.subscribe('lists');
 
       $scope.helpers({
-        tasks(){
-          var taskID = $scope.getReactively('taskID');
-          console.info('taskID', taskID);
-          var selector = {};
-          var tasks = Tasks.find();
-          tasks.forEach(function(submit) {
-            if(submit.submitList){
-              var counted = submit.submitList.length;
-              console.info('counted', counted);
-              for(x=0;x<counted;x++){
-                if(submit.submitList[x].userID == $scope.userID){
-                  $scope.notyet = false;
-                }
-              }
-            }
-          })
-          console.info('tasks', tasks);
-          var proNum = tasks.count();
+        lists(){
+          var limit = parseInt($scope.getReactively('perPage'));
+          var skip  = parseInt(( $scope.getReactively('page')-1 )* $scope.perPage);
+          var sort  = $scope.getReactively('sort');            
+          var listID = $scope.listID;
+          console.info('taskID', listID);
+          var selector = {_id : listID};
+          var lists = Lists.find(selector,  { limit: limit, skip: skip, sort: {coupon_codes: sort} });     
+          console.info('tasks', lists);
+          var proNum = lists.count();
           console.info('pronum', proNum);
-          return tasks;
+          return lists;
+        },
+        totalLists(){                
+          var listID = $scope.listID;          
+          var selector = {_id : listID};
+          var lists = Lists.find(selector);
+          console.info('array object', lists);         
+          return lists;
         }
 
       })//helpers
@@ -80,8 +73,8 @@ class TasklistCtrl{
       $scope.openProfile2 = function (selected2) {
         console.info('selected:', selected2[0]._id);
         var taskID = selected2[0]._id;
-        var projectID = $scope.projectID;
-        $state.go('Task', {stateHolder : 'Task', userID : Meteor.userId(), projectID: projectID, taskID : taskID});
+        var listID = $scope.listID;
+        $state.go('Task', {stateHolder : 'Task', userID : Meteor.userId(), listID: listID, taskID : taskID});
       }
 
       $scope.getToastPosition = function() {
@@ -111,17 +104,17 @@ class TasklistCtrl{
           $scope.show = !$scope.show;
       };
 
-      $scope.addTask = function($event, projectID) {
+      $scope.addTask = function($event, listID) {
         $mdDialog.show({
           clickOutsideToClose: false,
           escapeToClose: true,
           locals: {
-            projectID: $scope.projectID
+            listID: $scope.listID
           },
           transclude: true,
-          controller: function($mdDialog, projectID, $scope) {
+          controller: function($mdDialog, listID, $scope) {
               $scope.searchTerm = '';
-              console.info('projectID', projectID);
+              console.info('listID', listID);
 
               $scope.done = false;
               $scope.existing = false;
@@ -131,18 +124,18 @@ class TasklistCtrl{
 
               $scope.subscribe('tasks');
 
-              $scope.projectID = projectID;
+              $scope.listID = listID;
 
               $scope.addTaskDb = function(details) {
                 $scope.done = true;
                 $scope.createdNow = true;
                 $scope.errorNow = false;
-                var projectID = $scope.projectID ;
+                var listID = $scope.listID ;
                 var taskname = details;
                 var dateNow = new Date();
                 console.info('taskname', taskname);
                     //var status = createUserFromAdmin(details);
-                $scope.register = Meteor.call('upsertTaskFromProject', projectID, taskname, dateNow, function(err, projectID) {
+                $scope.register = Meteor.call('upsertTaskFromProject', listID, taskname, dateNow, function(err, listID) {
                       if (err) {
                         $scope.done = false;
                         $scope.errorNow = true;
@@ -202,14 +195,14 @@ class TasklistCtrl{
 
               $scope.removeNow = function() {
                   var taskID = $scope.passedId;
-                  var projectID = '';
+                  var listID = '';
                   var status = 'inactive';
 
                   $scope.done = true;
                   $scope.existing = false;
                   $scope.createdNow = !$scope.createdNow;
                   //var status = createUserFromAdmin(details);
-                  $scope.register = Meteor.call('upsertTaskFromList', taskID, projectID, status, function(err, userID) {
+                  $scope.register = Meteor.call('upsertTaskFromList', taskID, listID, status, function(err, userID) {
                     if (err) {
                       $scope.done = false;
                       $scope.createdNow = !$scope.createdNow;
@@ -286,9 +279,9 @@ class TasklistCtrl{
     }
 }
 
-app.component('tasklist', {
-    templateUrl: 'client/components/tasklist/tasklist.html',
-    controllerAs: 'tasklist',
-    controller: TasklistCtrl,
+app.component('couponcodes', {
+    templateUrl: 'client/components/couponcodes/couponcodes.html',
+    controllerAs: 'couponcodes',
+    controller: CouponcodesCtrl,
     transclude: true
 })

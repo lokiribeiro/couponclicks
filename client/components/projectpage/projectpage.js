@@ -1,16 +1,29 @@
 import {app} from '/client/app.js';
 
 import Profiles from '/imports/models/profiles.js';
-import Projects from '/imports/models/projects.js';
+import Lists from '/imports/models/lists.js';
 
 class ProjectpageCtrl{
 
   constructor($rootScope, $scope, $element, $timeout, $mdSidenav, $log, $mdDialog, $state, $mdToast){
       'ngInject';
 
-      console.info('branchID', $rootScope.projectID);
-      $scope.projectID = $rootScope.projectID;
+      console.info('branchID', $rootScope.listID);
+      $scope.listID = $rootScope.listID;
       $scope.userID = $rootScope.userID;
+
+      $scope.subscribe('lists');
+
+      $scope.helpers({
+          lists() {
+                var listID = $scope.listID;
+                console.info('listID =', $scope.listID);
+                var selector = {_id : listID};
+                var lists = Lists.find(selector);
+                console.info('projects', lists.count());
+                return lists;
+        }
+      });//helpers
 
       $scope.show = false;
 
@@ -25,21 +38,7 @@ class ProjectpageCtrl{
       $scope.deletedNows = false;
       $scope.done = false;
       $scope.existing = false;
-      $scope.last = false
-
-      $scope.subscribe('projects', function () {
-          return [$scope.getReactively('projectID')];
-      });
-
-      $scope.helpers({
-          projects() {
-                var projectID = $scope.projectID;
-                var selector = {_id : projectID};
-                var projects = Projects.find(selector);
-                console.info('projects', projects);
-                return projects;
-        }
-      });//helpers
+      $scope.last = false      
 
       var last = {
         bottom: true,
@@ -70,30 +69,30 @@ class ProjectpageCtrl{
       }
 
       $scope.openDialog = function ($event) {
-          $scope.projectID = $scope.projectID;
-          console.info('userid', $scope.projectID );
-          var projectID = $scope.projectID;
+          $scope.listID = $scope.listID;
+          console.info('userid', $scope.listID );
+          var listID = $scope.listID;
           $mdDialog.show({
           clickOutsideToClose: false,
           escapeToClose: true,
           transclude: true,
           locals:{
-            projectID : $scope.projectID
+            listID : $scope.listID
           },
-          controller: function($scope, $mdDialog, projectID){
-            $scope.projectID = projectID;
+          controller: function($scope, $mdDialog, listID){
+            $scope.listID = listID;
             $scope.deletedNow = false;
             $scope.existing = false;
             $scope.done = false;
 
-            $scope.removeuserNow = function(projectID) {
-              console.info('projectID', projectID);
-              var projectID = projectID;
+            $scope.removeuserNow = function(listID) {
+              console.info('listID', listID);
+              var listID = listID;
 
             $scope.done = true;
             $scope.deletedNow = !$scope.deletedNow;
 
-            Meteor.call('deleteProject', projectID, function(err, projectID) {
+            Meteor.call('deleteProject', listID, function(err, listID) {
                       if (err) {
                           //do something with the id : for ex create profile
                           $scope.done = false;
@@ -133,14 +132,14 @@ class ProjectpageCtrl{
           $scope.done = true;
           $scope.createdNow = false;
           $createdNows = false;
-          var projectID = $scope.projectID ;
+          var listID = $scope.listID ;
           var userType = 'user';
           var userID = $scope.userID;
-          var projectID = $scope.projectID;
+          var listID = $scope.listID;
           console.info('userID', userID);
-          console.info('projectID', projectID);
+          console.info('listID', listID);
 
-          $scope.register = Meteor.call('upsertProjectUser', userID, userType, projectID, function(err, userID) {
+          $scope.register = Meteor.call('upsertProjectUser', userID, userType, listID, function(err, userID) {
             if (err) {
                console.log('error here');
               //do something with the id : for ex create profile
@@ -149,7 +148,7 @@ class ProjectpageCtrl{
             }
           });
 
-          $scope.register = Meteor.call('upsertProjectFromUser', userID, userType, projectID, function(err, userID) {
+          $scope.register = Meteor.call('upsertProjectFromUser', userID, userType, listID, function(err, userID) {
             if (err) {
               var toasted = 'Error updating project details.';
               var pinTo = $scope.getToastPosition();

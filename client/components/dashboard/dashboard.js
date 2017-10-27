@@ -68,7 +68,7 @@ class DashboardCtrl{
       $scope.helpers({
         lists(){
           var selector = {};
-          var lists =  Lists.find();
+          var lists =  Lists.find(selector);
           console.info('lists', lists);
           var count = lists.count();
           console.info('listCount', count);
@@ -82,7 +82,7 @@ class DashboardCtrl{
       $scope.projected = function (selected) {
         console.info('project', selected);
         var projectId = selected;
-        $state.go('Projectpage', { userID : Meteor.userId(), stateHolder : 'Project', projectID : projectId });
+        $state.go('Projectpage', { userID : $scope.userId, stateHolder : 'codes', listID : projectId });
       }
 
       $scope.items = [

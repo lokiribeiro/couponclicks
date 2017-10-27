@@ -67,6 +67,13 @@ class CreatelistCtrl{
         console.info('arrayLength', parseInt($scope.arrayLength) - 1);
         if($scope.indexPoint == (parseInt($scope.arrayLength) - 1))
            {
+             Meteor.call('upsertTotalCodes', $scope.indexPoint, $scope.listID, function(err, result) {
+               if (err) {
+                 console.log('success upsertCode');
+              } else {
+                 console.log('error upsertCode');                
+              }
+            });
             window.setTimeout(function(){
                 $scope.createdNows = !$scope.createdNows;
                 $scope.done = false;

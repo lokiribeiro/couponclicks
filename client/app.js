@@ -119,7 +119,7 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
           }
       })
       .state('Projectpage', {
-            url:'/:stateHolder/PRJP/:userID/:projectID',
+            url:'/:stateHolder/PRJP/:userID/:listID',
             template: '<projectpage></projectpage>',
             resolve: {
                 currentUser($q, $state) {
@@ -132,7 +132,7 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
             },
             onEnter: function($rootScope, $stateParams, $state) {
                 $rootScope.stateHolder = $stateParams.stateHolder;
-                $rootScope.projectID = $stateParams.projectID;
+                $rootScope.listID = $stateParams.listID;
             }
         })
         .state('Task', {

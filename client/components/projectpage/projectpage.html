@@ -7,7 +7,7 @@
       </md-tooltip>
       <md-icon md-svg-icon="../../assets/img/white_backarrow24.svg"></md-icon>
       </a>
-      <h2 class="md-flex" style="padding-left: 24px !important;">back to projects</h2>
+      <h2 class="md-flex" style="padding-left: 24px !important;">back to lists</h2>
       <span flex></span>
     </div>
   </div>
@@ -23,9 +23,9 @@
         <div flex layout="column" layout-align="center center">
           <img ng-src="../../assets/img/school_icon48.svg" alt="photo"/>
         </div>
-        <div class="md-list-item-text" flex="60" layout="column" layout-align="start start" ng-repeat="project in projects">
-          <span class="md-headline">{{project.project_name}}</span>
-            <span class="md-subhead">{{project.field}} </span>
+        <div class="md-list-item-text" flex="60" layout="column" layout-align="start start" ng-repeat="list in lists">
+          <span class="md-headline">{{list.product_name}}</span>
+            <span class="md-subhead">{{list.total_codes}} Coupon Codes</span>
         </div>
         <div layout="row" layout-align="end start" flex="20" layout-fill>
           <md-button class="md-default md-raised" aria-label="create" ng-click="claimProject()" ng-if="$root.userLoggedInRole == 'user' && $root.userLoggedInProject == undefined" >

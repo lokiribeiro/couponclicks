@@ -1,11 +1,4 @@
-<md-toolbar class="md-table-toolbar md-default" flex>
-<div class="md-toolbar-tools" >
-  <md-button class="md-default md-raised" aria-label="create" ng-click="addTask($event, selected)" ng-show="$root.userLoggedInRole == 'superadmin' || $root.userLoggedInRole == 'admin'" >
-    ADD TASK
-  </md-button>
-  <div flex ng-hide="$root.userLoggedInRole == 'superadmin' || $root.userLoggedInRole == 'admin'">The task list for today is</div>
-</div>
-</md-toolbar>
+
 <md-toolbar class="md-table-toolbar md-default"  flex="100" ng-show="filter.show">
 <div class="md-toolbar-tools">
   <form name="filter.form" flex>
@@ -28,12 +21,14 @@
   <table md-table md-row-select ng-model="selected2" md-progress="promise" flex>
     <thead md-head md-order="query.order" md-on-reorder="profiles" class="md-head">
       <tr md-row>
-        <th md-column ><span>Task name</span></th>
+        <th md-column ><span>coupon codes</span></th>
+        <th md-column ><span>owner</span></th>
       </tr>
     </thead>
-    <tbody md-body ng-repeat="task in tasks" ng-if="task.project_id == projectID">
-      <tr md-row md-select="task" md-select-id="task._id" md-auto-select ng-cloak>
-        <td md-cell><strong ng-repeat="submit in task.submitList track by $index" ng-if="$root.userID == submit.userID">Completed: </strong>{{task.taskname}}</td>
+    <tbody md-body ng-repeat="list in lists" ng-if="list._id == listID">
+      <tr md-row ng-repeat="code in list.codes track by $index"  md-select="code" md-select-id="code.coupon_code" md-auto-select ng-cloak>
+        <td md-cell><strong ></strong>{{code.coupon_code}}</td>
+        <td md-cell><strong ></strong>{{code.status}}</td>
       </tr>
     </tbody>
   </table>
@@ -41,10 +36,11 @@
 <md-toolbar class="md-table-toolbar md-default" flex="100" ng-show="selected2.length">
 <div class="md-toolbar-tools" layout="row" layout-align="end center">
   <md-button class="md-default md-raised" aria-label="unassign" ng-click="removeTask($event, selected2)" ng-show="$root.userLoggedInRole == 'superadmin' || $root.userLoggedInRole == 'admin'">
-    DELETE TASK
+    DELETE CODE
   </md-button>
   <md-button class="md-default md-raised" aria-label="unassign" ng-click="openProfile2(selected2)">
-    VIEW TASK
+    VIEW CODE
   </md-button>
 </div>
 </md-toolbar>
+<md-table-pagination ng-repeat="list in lists" ng-if="list._id == listID" ng-hide="filter.show || selected2.length" md-limit="perPage" md-page="page" md-total="{{list.total_codes}}" md-on-paginate="lists" md-page-select></md-table-pagination>

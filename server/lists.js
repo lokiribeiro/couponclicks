@@ -16,9 +16,8 @@ Lists.allow({
 
 });
 
-Meteor.publish('lists', function (selector) {
-      selector = {};
-      return Lists.find(selector);
+Meteor.publish('lists', function () {      
+      return Lists.find();
 });
 
 Meteor.methods({
@@ -31,5 +30,13 @@ Meteor.methods({
         var modifier = {$push: {codes: {coupon_code: couponCode, status: status }}}
         var listUpsert = Lists.update(selector, modifier);
         return listUpsert;
+    },
+    upsertTotalCodes(totalCodes, listID){
+        var selector = {_id: listID};
+        var modifier = {$set: {
+            total_codes: totalCodes
+        }};
+        var typeUpsert = Lists.upsert(selector, modifier);
+      return typeUpsert;        
     }
 })
