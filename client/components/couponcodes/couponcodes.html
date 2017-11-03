@@ -25,8 +25,8 @@
         <th md-column ><span>owner</span></th>
       </tr>
     </thead>
-    <tbody md-body ng-repeat="list in lists" ng-if="list._id == listID">
-      <tr md-row ng-repeat="code in list.codes track by $index"  md-select="code" md-select-id="code.coupon_code" md-auto-select ng-cloak>
+    <tbody md-body >
+      <tr md-row ng-repeat="code in lists" md-select="code" md-select-id="code.coupon_code" md-auto-select ng-cloak>
         <td md-cell><strong ></strong>{{code.coupon_code}}</td>
         <td md-cell><strong ></strong>{{code.status}}</td>
       </tr>
@@ -43,4 +43,5 @@
   </md-button>
 </div>
 </md-toolbar>
-<md-table-pagination ng-repeat="list in lists" ng-if="list._id == listID" ng-hide="filter.show || selected2.length" md-limit="perPage" md-page="page" md-total="{{list.total_codes}}" md-on-paginate="lists" md-page-select></md-table-pagination>
+<md-table-pagination ng-hide="filter.show || selected2.length" md-limit-options="[5, 10, 15]" md-limit="perPage" md-page="page" md-total="{{totalLists}}" md-on-paginate="lists" md-page-select></md-table-pagination>
+

@@ -1,5 +1,6 @@
 import {app} from '/client/app.js';
 import Lists from '/imports/models/lists.js';
+import Codes from '/imports/models/codes.js';
 import ngFileUpload from 'ng-file-upload';
 import Papa from '/imports/ui/papaparse.js';
 
@@ -55,13 +56,18 @@ class CreatelistCtrl{
         //var status = createUserFromAdmin(details);
         var couponCode = details.couponcode;
         if(couponCode){
-           Meteor.call('upsertCode', couponCode, $scope.listID, function(err, result) {
-               if (err) {
-                 console.log('success upsertCode');
-              } else {
-                 console.log('error upsertCode');                
-              }
-            });
+          var code = [];
+
+          code.coupon_code = couponCode;               
+          code.listID = $scope.listID;
+          code.status = 'unclaimed';
+        
+          var status = Codes.insert(code);
+          if (status) {
+           console.log('success upsertCode');       
+            } else {
+           console.log('error upsertCode');   
+          }           
         }       
         console.info('indexPoint', $scope.indexPoint);
         console.info('arrayLength', parseInt($scope.arrayLength) - 1);

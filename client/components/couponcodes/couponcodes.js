@@ -2,6 +2,7 @@ import {app} from '/client/app.js';
 
 import Profiles from '/imports/models/profiles.js';
 import Lists from '/imports/models/lists.js';
+import Codes from '/imports/models/codes.js';
 
 class CouponcodesCtrl{
 
@@ -29,6 +30,7 @@ class CouponcodesCtrl{
       $scope.done = false;
       $scope.existing = false;
       $scope.last = false;
+      $scope.codeTotals = 1000;
 
       $scope.sort2 = 1;
       $scope.enabled = [];
@@ -36,6 +38,7 @@ class CouponcodesCtrl{
 
       $scope.subscribe('users');
       $scope.subscribe('lists');
+      $scope.subscribe('codes');
 
       $scope.helpers({
         lists(){
@@ -44,19 +47,20 @@ class CouponcodesCtrl{
           var sort  = $scope.getReactively('sort');            
           var listID = $scope.listID;
           console.info('taskID', listID);
-          var selector = {_id : listID};
-          var lists = Lists.find(selector,  { limit: limit, skip: skip, sort: {coupon_codes: sort} });     
+          var selector = {listID : listID};
+          var lists = Codes.find(selector,  { limit: limit, skip: skip, sort: {coupon_codes: sort} });     
           console.info('tasks', lists);
           var proNum = lists.count();
           console.info('pronum', proNum);
           return lists;
         },
-        totalLists(){                
-          var listID = $scope.listID;          
-          var selector = {_id : listID};
-          var lists = Lists.find(selector);
-          console.info('array object', lists);         
-          return lists;
+        totalLists(){            
+          var listID = $scope.listID;
+          console.info('taskID', listID);
+          var selector = {listID : listID};
+          var totalcodes = Codes.find(selector).count();     
+          console.info('totalcodes', totalcodes);          
+          return totalcodes;
         }
 
       })//helpers

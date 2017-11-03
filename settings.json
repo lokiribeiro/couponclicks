@@ -1,7 +1,3 @@
 {
-  "galaxy.meteor.com": {
-     "env": {
-       "MONGO_URL": "mongodb://lokigreyex:Accenture01@ds143191.mlab.com:43191/taskmanager"
-     }
-   }
+  "SENDGRID_API_KEY" : "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"
 }

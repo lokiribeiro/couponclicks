@@ -83,10 +83,23 @@ class RegisterCtrl{
       }
 
       $scope.createProfile = function (newUserID, profileDetails, profile) {
+        var userFirstname = profile.firstname;
+        console.info('userFirstname', userFirstname);
+
+        var toName = userFirstname;
+        var toEmail = profileDetails.email;
+
+        Meteor.call('sendEmail', toEmail, toName, function(err, detail) {
+            if (err) {
+              console.info('error encountered');
+           } else {
+            console.info('success encountered');
+           }
+        });
+              
+
                 console.log(newUserID);
-                //console.log(profileDetails.emails[0].address);
-                var userFirstname = profile.firstname;
-                console.info('userFirstname', userFirstname);
+                //console.log(profileDetails.emails[0].address);                
 
                 var profile = [];
 
@@ -99,6 +112,7 @@ class RegisterCtrl{
                 profile.profiles_type = 'user';
 
                 var profileID = Profiles.insert(profile);
+
 
                 console.info('profileID', profileID);
 

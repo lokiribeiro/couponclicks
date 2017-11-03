@@ -5,6 +5,8 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "@sendgrid/client": "^6.1.4",
+    "@sendgrid/mail": "^6.1.4",
     "angular": "^1.6.4",
     "angular-animate": "^1.6.4",
     "angular-aria": "^1.6.4",
@@ -17,7 +19,9 @@
     "angularjs-social-login": "^2.5.1",
     "babel-runtime": "^6.23.0",
     "bcrypt": "^1.0.2",
-    "meteor-node-stubs": "~0.2.4"
+    "meteor-node-stubs": "~0.2.4",
+    "ng-file-upload": "^12.2.13",
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "angular-ui-router-anim-in-out": "^1.0.2"

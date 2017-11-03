@@ -1,9 +1,9 @@
 <md-dialog aria-label="Delete user" >
     <md-dialog-content  layout="column" layout-align="start start"  layout-wrap layout-fill layout-padding flex>
     <div layout="row" flex>
-      <h2 style="font-weight:normal" ng-hide="deletedNow">Delete Project</h2>
-      <h2 style="font-weight:normal" ng-if="done">Deleting project</h2>
-      <h2 style="font-weight:normal" ng-if="deletedNows"><md-icon md-svg-icon="../../assets/img/indigo_check24.svg" style="margin: auto 3px auto 0;" ></md-icon> Project Deleted</h2>
+      <h2 style="font-weight:normal" ng-hide="deletedNow">Delete List</h2>
+      <h2 style="font-weight:normal" ng-if="done">Deleting list</h2>
+      <h2 style="font-weight:normal" ng-if="deletedNows"><md-icon md-svg-icon="../../assets/img/indigo_check24.svg" style="margin: auto 3px auto 0;" ></md-icon> List Deleted</h2>
       <span flex></span>
     </div>
     <md-progress-linear md-mode="indeterminate" flex ng-show="done"></md-progress-linear>
@@ -11,7 +11,7 @@
     <span layout="column" layout-align="start start" flex ng-hide="deletedNow">
       <span layout="row">
       <p>
-        {{selected}} Note: All data associated with this project will be deleted.
+        {{selected}} Note: All data associated with this list will be deleted.
       </p>
       </span>
     </span>
@@ -22,7 +22,7 @@
       CANCEL
     </md-button>
       <md-button type="submit" ng-click="removeuserNow(projectID)" ng-hide="deletedNow" class="md-primary">
-        DELETE PROJECT
+        DELETE LIST
       </md-button>
       <!-- end hide -->
       <md-button ng-if="deletedNows" ng-click="cancelNow()" class="md-primary">

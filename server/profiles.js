@@ -1,4 +1,5 @@
 import Profiles from '/imports/models/profiles.js';
+import { HTTP } from 'meteor/http';
 
 Profiles.allow({
     insert(userId, profile){
@@ -73,6 +74,52 @@ Meteor.methods({
       var typeUpsert = Profiles.upsert(selector, modifier);
       return typeUpsert;
     },
+    sendEmail(toEmail, toName){     
+      var status = '';  
+      HTTP.call("POST", "https://api.sendgrid.com/v3/mail/send", {
+        data : {
+          "personalizations": [
+          {
+            "to": [
+              {
+                "email": toEmail,
+                "name": toName
+              }
+            ],
+            "subject": "ClickCoupons Registration Successful"
+          }
+        ],
+        "from": {
+          "email": "admin@couponclicks.io",
+          "name": "Sam Smith"
+        },
+        "reply_to": {
+          "email": "admin@couponclicks.io",
+          "name": "Sam Smith"
+        },
+        "subject": "Hello, World!",
+        "content": [
+          {
+              "type": "text/html",
+            "value": "<html><p>Thank you for registering at clickcoupons.io</p></html>"
+          }
+        ]}, 
+        headers : {
+          "Authorization" : "Bearer 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"
+        }
+    }, function (error, response){
+        if(error){
+          status = error;
+          console.info('error', error);
+        } else {
+          status = response;
+          console.info('response', response);
+        }
+      });
+      console.info('status', status);
+      return status;
+      
+    }
 
 
 })
