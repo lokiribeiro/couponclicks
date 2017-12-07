@@ -4,21 +4,27 @@
     <div layout="row" layout-align="center center" layout-padding layout-wrap layout-fill style="padding-bottom: 32px; padding-top: 10px;" ng-cloak>
       <h1 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">My Lists</h1>
       <h3 hide-xs style="font-weight: normal;" layout="row" layout-fill layout-align ="center center">Explanation on how to use here</h3>
-      <md-card  ng-repeat="list in lists" ng-click="projected(list._id)"  class="card"  flex-gt-sm="50" flex-gt-md="30" layout-wrap layout-fill style="margin: 10px 10px 0 0;" ng-if="$root.userID == list.userID" ng-cloak>
+      <span layout="row" layout-fill layout-align="center center">
+        <md-button  class="md-primary md-raised" ng-click="openDialog($event)">
+          CREATE LIST
+        </md-button>
+      </span>
+      <md-card  class="card-1" ng-repeat="list in lists" ng-click="projected(list._id)"  class="card"  flex-gt-sm="50" flex-gt-md="30" layout-wrap layout-fill style="margin: 10px 10px 0 0;" ng-if="$root.userID == list.userID" ng-cloak>
         <md-card-title ng-cloak>
           <md-card-title-text>
             <a href="#" layout="column" layout-align="start start" ng-click="projected(project._id)">
             <span class="md-headline">{{list.product_name}}</span>
-            <span class="md-subhead">{{list.date | date:medium}}</span>
-            <span class="md-subhead">{{list.total_codes}} coupon codes</span>
+            <span class="md-subhead">Total Codes: {{list.total_codes}} </span>
+            <span class="md-subhead">Delivered: 0 | Undelivered: {{list.total_codes}}</span>            
           </a>
-          </md-card-title-text>
-        </md-card-title>      
-        <md-card-actions layout="row" layout-align="end center" ng-cloak>
-          <md-button class="md-icon-button" ng-click="projected(list._id)" aria-label="Apps">
-            <md-icon md-svg-icon="../../assets/img/black_launch24.svg"></md-icon>
-          </md-button>
-        </md-card-actions>      
+          </md-card-title-text>  
+          <md-card-title-media >
+            <div class="md-media-sm card-media" layout="row" layout-align="end center">
+            <img ng-src="../../assets/img/black_list48.svg" style="margin: auto 3px auto 0;" >
+          </div>
+          </md-card-title-media>         
+        </md-card-title>  
+                     
       </md-card>
       <!-- <md-card ng-click="redirect(userapp.appName)" class="card-1" ng-repeat="userapp in userapps" flex-gt-sm="50" flex-gt-md="25" layout-wrap layout-fill style="margin: 10px 10px 0 0;" layout-align="center center">
         <img ng-src="{{userapp.appLoc}}" alt="{{userapp.appName}}" style="width: 48px !important; height: 48px !important;">
@@ -31,7 +37,7 @@
 </md-content>
 
 <div ng-cloak>
-<md-fab-speed-dial ng-hide="demo.hidden" md-direction="up" md-scale md-open="demo.isOpen"
+<!--<md-fab-speed-dial ng-hide="demo.hidden" md-direction="up" md-scale md-open="demo.isOpen"
                        class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': demo.hover }"
                        ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false" ng-cloak style="position: fixed !important;">
       <md-fab-trigger>
@@ -52,7 +58,7 @@
           </md-button>
         </div>
       </md-fab-actions>
-</md-fab-speed-dial>
+</md-fab-speed-dial>-->
 </div>
 </div>
 

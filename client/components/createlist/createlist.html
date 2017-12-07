@@ -1,13 +1,14 @@
-<md-dialog style="opacity: 1 !important;" aria-label="Create a new user" layout="column" layout-align="start center" flex="100">
+<md-dialog style="opacity: 1 !important;" aria-label="Create a new user" layout="column" layout-align="start center" flex>
   <form name="createuserForm" ng-submit="createProject(create.register)">
     <md-dialog-content layout="column" layout-align="start start" layout-wrap layout-fill layout-padding flex>
     <div layout="row" flex>
       <h2 style="font-weight:normal" ng-hide="createdNow">Add List </h2>
       <h2 style="font-weight:normal" ng-if="done">Creating List</h2>
       <h2 style="font-weight:normal" ng-if="createdNows"><md-icon md-svg-icon="../../assets/img/indigo_check24.svg" style="margin: auto 3px auto 0;" ></md-icon> Created new list</h2>
-      <span flex></span>
+      <span flex></span>        
     </div>
     <md-progress-linear md-mode="indeterminate" flex ng-show="done"></md-progress-linear>
+      
 
     <!-- hide here -->
     <span layout="column" ng-hide="createdNow" layout-fill>

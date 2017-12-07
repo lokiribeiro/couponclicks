@@ -2,12 +2,15 @@ import {app} from '/client/app.js';
 
 import Tasks from '/imports/models/tasks.js';
 
-class TaskinfoCtrl{
+class EmbedcodesCtrl{
 
-  constructor($scope, $timeout, $mdSidenav, $element, $log, $mdDialog, $state, $q, $mdToast, $rootScope){
+  constructor($scope, $timeout, $mdSidenav, $element, $log, $mdDialog, $state, $q, $mdToast, $rootScope, $sce){
       'ngInject';
 
-      $scope.taskID = $rootScope.taskID;
+      $scope.someSafeContent = $sce.trustAsHtml("<i>Hello</i> <b>World!</b>");
+
+      $scope.taskID = $rootScope.listID;
+      console.info('taskID', $scope.taskID);      
       $scope.userID = $rootScope.userID;
 
       $scope.show = false;
@@ -15,7 +18,7 @@ class TaskinfoCtrl{
 
       $scope.subscribe('tasks2', function () {
           return [$scope.getReactively('taskID')];
-      });
+      });      
 
       $scope.helpers({      
         tasks(){
@@ -221,9 +224,9 @@ class TaskinfoCtrl{
     }
 }
 
-app.component('taskinfo', {
-    templateUrl: 'client/components/taskinfo/taskinfo.html',
-    controllerAs: 'taskinfo',
-    controller: TaskinfoCtrl,
+app.component('embedcodes', {
+    templateUrl: 'client/components/embedcodes/embedcodes.html',
+    controllerAs: 'embedcodes',
+    controller: EmbedcodesCtrl,
     transclude: true
 })

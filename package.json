@@ -21,6 +21,7 @@
     "bcrypt": "^1.0.2",
     "meteor-node-stubs": "~0.2.4",
     "ng-file-upload": "^12.2.13",
+    "ngclipboard": "^1.1.2",
     "sendgrid": "^5.2.3"
   },
   "devDependencies": {

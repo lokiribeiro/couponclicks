@@ -4,15 +4,9 @@ import Lists from '/imports/models/lists.js';
 class DashboardCtrl{
 
   constructor($scope, $timeout, $window, $mdSidenav, $log, $mdDialog, $state, $stateParams){
-      'ngInject';
+      'ngInject';           
 
-      /*angular.element(document).ready(function () {
-          $scope.userDetails = Meteor.userId();
-          var verified = Meteor.user();
-          var emailVerified = verified.emails.verified;
-          console.info('emailVerified', verified);
-          if (!emailVerified) {
-            $mdDialog.show({
+      /*      $mdDialog.show({
               clickOutsideToClose: false,
               escapeToClose: false,
               transclude: true,
@@ -55,11 +49,12 @@ class DashboardCtrl{
                       $mdDialog.cancel();
                     };
                   },
-                  templateUrl: 'client/components/admissions/removeDialogs/deleteapplicant.html',
-                  targetEvent: $event
-                });
-              }
-      });*/
+                  templateUrl: 'client/components/welcomepage/welcomepage.html'                  
+                });              
+                */
+      
+
+      $('body').removeClass('loginP');
 
       $scope.userId = Meteor.userId();
       $scope.sort = 1;
@@ -89,9 +84,8 @@ class DashboardCtrl{
         { name: "Add list", icon: "../../assets/img/white_roleadd24.svg", direction: "left" }
       ];
 
-      $scope.openDialog = function($event, item) {
-      // Show the dialog
-      if(item.name == 'Add list'){
+      $scope.openDialog = function($event) {
+      // Show the dialog      
       $mdDialog.show({
         clickOutsideToClose: false,
         escapeToClose: true,
@@ -107,8 +101,7 @@ class DashboardCtrl{
         controller: DashboardCtrl,
         template: '<createlist></createlist>',
         targetEvent: $event
-      });
-      }
+      });      
     }
 
 

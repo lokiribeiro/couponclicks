@@ -1,0 +1,29 @@
+<md-dialog aria-label="Delete user" >
+    <md-dialog-content  layout="column" layout-align="center center"  layout-wrap layout-fill layout-padding flex>
+    <div layout="row" flex>
+      <h2 style="font-weight:normal" ng-hide="deletedNow">Welcome to Coupon Clicks</h2>      
+      <span flex></span>        
+    </div>
+    <md-progress-linear md-mode="indeterminate" flex ng-show="done"></md-progress-linear>
+
+    <span layout="column" layout-align="center center" flex ng-hide="deletedNow">
+      <span layout="row">
+      <p>
+        We’re excited to have you here! To get started watch this brief video that explains how the software works        
+      </p>
+      </span>
+      <span layout="row">
+      <p>
+        If you need any additional help feel free to contact us or visit our Help Section to learn more about how to get started!         
+      </p>
+      </span>
+    </span>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="space-between center" layout-fill>
+      <!-- hide these -->   
+      <md-button type="submit" ng-click="closeDialog()" class="md-primary">
+        Go to Dashboard
+      </md-button>
+      <!-- end hide -->      
+    </md-dialog-actions>
+</md-dialog>

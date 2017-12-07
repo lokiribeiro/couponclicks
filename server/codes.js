@@ -19,3 +19,18 @@ Codes.allow({
 Meteor.publish('codes', function () {      
       return Codes.find();
 });
+
+Meteor.methods({
+    upsertCouponCode(listID, ipAddress){
+        console.log(listID);
+        console.log(ipAddress);
+        var status = 'claimed';
+        var selector = {listID: listID};
+        var modifier = {$set: {
+            ipAddress: ipAddress, status: status
+          }};
+        var codesUpsert = Codes.upsert(selector, modifier);
+        return codesUpsert;
+      },
+
+});

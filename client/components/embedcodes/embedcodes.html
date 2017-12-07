@@ -1,0 +1,27 @@
+
+<span>
+    <div layout="row" layout-align="start start" layout-wrap >
+      <div layout="column" layout-align="start start"  flex-gt-md="100" flex="100" flex-gt-xs="100" layout-padding >
+        <h5 style="margin-top: 0 !important; margin-bottom: 0 !important; color: #555; padding-bottom: 0 !important;" >INSTRUCTIONS
+          <span ng-if="!notyet"> (SUBMITTED) </span>
+        </h5>        
+        <span layout="row" flex ng-if="show" layout-fill>
+        <md-input-container  layout-fill md-no-float class="md-block" style="margin: 10px 0 !important;">
+            <input ng-model="task.details" aria-label="details" type="textbox" ng-required placeholder="Enter task details">
+        </md-input-container>
+        </span>
+      </div>
+      <md-divider></md-divider>
+      <div layout="row" layout-align="start start" layout-padding layout-wrap ng-hide="task.details">
+      <h3 style="margin-top: 0 !important; margin-bottom: 0 !important; color: #555; font-weight: normal !important; padding-top: 0 !important;" ng-hide="task.details">details show up here</h3>
+    </div>
+    </div>
+    <md-subheader class="md-no-sticky" ng-if="$root.userLoggedInRole == 'user'"><strong>&lt;a href='http://app.couponclicks.io/claimcode/CLCd/{{userID}}/{{taskID}}'&gt;Claim your code here &lt;/a&gt;</strong></md-subheader>          
+    </span>
+    
+    
+    
+    
+    
+    <!-- <md-divider></md-divider>-->
+    

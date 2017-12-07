@@ -589,6 +589,9 @@ pre {
 }
 .loginP{
   border-radius: 0;
+  background-image:url(./assets/img/bg-main.jpg);
+	background-position:top right;
+	background-repeat:no-repeat;
 }
 .app-header-fixed {
   padding-top: 64px;

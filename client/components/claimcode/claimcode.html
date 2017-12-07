@@ -1,0 +1,41 @@
+<div flex-md layout-align="center center" class="slide smooth" style="margin-top: 20px;">
+    <!-- <div layout="column" layout-fill layout-padding>
+      <div layout="row" layout-align ="center none" layout-wrap>
+        <img alt="SQUALA" style="width:220px; height:50px" class="img-responsive text-center" src="../../assets/img/logo.png" />
+      </div>
+    </div>-->
+    <h1 hide-xs style="font-weight: normal; color: #fff !important;" layout="row" layout-fill layout-align ="center center">CouponClicks</h1>
+    <div flex layout="row" layout-align="center none" layout-wrap>
+        <md-card class="card card-1" ng-show="codes">
+          <md-card-title>
+            <md-card-title-text layout-align="center none">
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+                <div layout="column" layout-align="center center" flex>
+                        <h5 style="font-weight:normal; margin-top: 0px !important;">Here's your unique code.</h5>
+                        <h2 style="font-weight:normal">{{couponCode}}</h2>  
+                        <div layout="row" layout-align="space-between center" layout-fill>
+                                <md-button type="submit" class="md-raised md-primary" layout-fill aria-label="login" ng-disabled="login.loginForm.$invalid()">Go back
+                                </md-button>
+                              </div>                      
+            </div>            
+            <md-toolbar ng-if="loginerror" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+              <p class="md-body-1">{{ loginerror }}</p>
+            </md-toolbar>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="column" layout-fill layout-margin >
+        <!-- <div layout="row" layout-align="center">
+          <a class="md-button" href="/register" ng-disabled>Need an account?</a>
+        </div> -->
+        <!-- <div layout="row" layout-align="center end" >
+            <img alt="Squala Apps" style="width:230px; height:23px" class="img-responsive text-center" src="../../assets/img/wlogostrip_230x17_1x.png" />
+        </div>-->
+        <div layout="row" layout-align="center end">
+          <small class="text-muted" style="color: #fff !important;">CouponClicks &copy; 2017</small>
+        </div>
+      </div>
+  </div>
+  

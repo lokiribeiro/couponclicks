@@ -1,6 +1,6 @@
 <md-sidenav flex class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-disable-scroll-target style="position:fixed;top: 0;" >
     <div layout="row" layout-align="start center" layout-padding lyout-fill layout-wrap>
-        <h2 style="font-weight:normal;">My {{$root.stateHolder}}</h2>
+        <h2 style="font-weight:normal;">CouponClicks</h2>
       </div>
     <md-divider></md-divider>
       <md-content class="md-primary" layout-padding>
@@ -19,7 +19,39 @@
             <div class="md-list-item-text" layout="column">
               <h3 class="md-primary"> Dashboard </h3>
             </div>
-          </md-list-item>
+          </md-list-item>          
+        </a>
+        <a  class="md-primary" href="/reports"  ng-click="toggleLeft()">
+        <md-list-item class="md-2-line" ng-click="null" ng-hide="$root.userLoggedInRole != 'superadmin' && (navigation.menuItem == 'Users' || navigation.menuItem == 'Roles' || navigation.menuItem == 'Responsibilities')">
+          <md-icon md-svg-icon="../../assets/img/black_reports24.svg" style="margin: auto 3px auto 0;"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3 class="md-primary"> Reports </h3>
+          </div>
+        </md-list-item>
+      </a>
+      <a  class="md-primary" href="/help"  ng-click="toggleLeft()">
+        <md-list-item class="md-2-line" ng-click="null" ng-hide="$root.userLoggedInRole != 'superadmin' && (navigation.menuItem == 'Users' || navigation.menuItem == 'Roles' || navigation.menuItem == 'Responsibilities')">
+          <md-icon md-svg-icon="../../assets/img/black_help24.svg" style="margin: auto 3px auto 0;"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3 class="md-primary"> FAQ & Help </h3>
+          </div>
+        </md-list-item>
+      </a>
+      <a  class="md-primary" href="/myaccount"  ng-click="toggleLeft()">
+        <md-list-item class="md-2-line" ng-click="null" ng-hide="$root.userLoggedInRole != 'superadmin' && (navigation.menuItem == 'Users' || navigation.menuItem == 'Roles' || navigation.menuItem == 'Responsibilities')">
+          <md-icon md-svg-icon="../../assets/img/black_person24.svg" style="margin: auto 3px auto 0;"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3 class="md-primary"> My Account </h3>
+          </div>
+        </md-list-item>
+        </a>
+        <a  class="md-primary" href="/contactus"  ng-click="toggleLeft()">
+        <md-list-item class="md-2-line" ng-click="null" ng-hide="$root.userLoggedInRole != 'superadmin' && (navigation.menuItem == 'Users' || navigation.menuItem == 'Roles' || navigation.menuItem == 'Responsibilities')">
+          <md-icon md-svg-icon="../../assets/img/black_contact24.svg" style="margin: auto 3px auto 0;"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3 class="md-primary"> Contact Us </h3>
+          </div>
+        </md-list-item>
         </a>
         <!-- <md-divider ></md-divider>
         <md-list-item class="md-2-line" ng-click="null">

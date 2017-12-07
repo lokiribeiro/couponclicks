@@ -7,6 +7,8 @@ class RegisterCtrl{
       constructor($scope, $reactive, $state) {
         'ngInject';
 
+        //$('body').removeClass('loginP');
+        
         this.$state = $state;
         $scope.confirmPass = '';
 

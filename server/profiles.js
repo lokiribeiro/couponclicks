@@ -91,21 +91,21 @@ Meteor.methods({
         ],
         "from": {
           "email": "admin@couponclicks.io",
-          "name": "Sam Smith"
+          "name": "Couponclicks"
         },
         "reply_to": {
           "email": "admin@couponclicks.io",
-          "name": "Sam Smith"
+          "name": "Couponclicks"
         },
-        "subject": "Hello, World!",
+        "subject": "Hey! Thanks for signing up for CouponClicks",
         "content": [
           {
               "type": "text/html",
-            "value": "<html><p>Thank you for registering at clickcoupons.io</p></html>"
+            "value": "<html><p>We’re Pumped you signed up for Couponclicks!</p><br /><p>Ecommerce businesses have been using CouponClicks to increase their conversion rates, drive more sales and build stronger relationships with their customers. We’ve helped plenty of amazon sellers and ecommerce companies grow their businesses and we’re excited to help you!</p><p>I just wanted to say hey and introduce myself!</p><p>We take your success very seriously so I wanted you to have <b>my personal cell phone number</b> in case you have any questions, need any help, or if you have any feedback on how we can make our service better. I’d love to hear from you!</p><p>Feel free to text me at any time <b>267-384-8770</b>.</p><p>You can also check out this Getting Started Guide or simply reply to this email.</p><br /><p>Thanks,<br />Mike Black & Chras Heckman<br />Cofounders of CouponClicks</p></html>"
           }
         ]}, 
         headers : {
-          "Authorization" : "Bearer"
+          "Authorization" : "Bearer "
         }
     }, function (error, response){
         if(error){

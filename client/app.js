@@ -11,10 +11,10 @@ import ngAnimate from 'angular-animate';
 import '../imports/ui/anim-in-out.js';
 import 'angularjs-social-login';
 import mdDataTable from 'angular-material-data-table';
-import ngFileUpload from 'ng-file-upload';
+import 'ng-file-upload';
 
-export var app = angular.module('taskManager',
-    [angularMeteor, ngMaterial, uiRouter, 'accounts.ui', ngAnimate, 'anim-in-out', 'socialLogin', mdDataTable, ngFileUpload]).value('THROTTLE_MILLISECONDS', 250);
+export var app = angular.module('couponclicks',
+    [angularMeteor, ngMaterial, uiRouter, 'accounts.ui', ngAnimate, 'anim-in-out', 'socialLogin', mdDataTable, 'ngFileUpload']).value('THROTTLE_MILLISECONDS', 250);
 
 app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdThemingProvider, $mdIconProvider, $provide, socialProvider) {
     'ngInject';
@@ -25,6 +25,29 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
     $stateProvider
     .state(
         'login', {
+            url:'/',
+            template: '<login></login>',
+            resolve: {
+                currentUser($q, $state) {
+                    if (!Meteor.userId()) {
+                      return $q.resolve();
+                    } else {
+                      return $q.reject('LOGGED_IN');
+                    };
+                }
+              }
+    })
+    .state(
+        'claimcode', {
+            url:'/claimcode/CLCd/:userID/:listID',
+            template: '<claimcode></claimcode>',            
+            onEnter: function($rootScope, $stateParams, $state) {
+                $rootScope.stateHolder = $stateParams.stateHolder;
+                $rootScope.listID = $stateParams.listID;
+            }
+    })
+    .state(
+        'signin', {
             url:'/login',
             template: '<login></login>',
             resolve: {
@@ -36,35 +59,7 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
                     };
                 }
               }
-    })
-    .state(
-        'home', {
-            url:'/',
-            template: '<home></home>',
-            resolve: {
-                currentUser($q, $state) {
-                    if (!Meteor.userId()) {
-                      return $q.resolve();
-                    } else {
-                      return $q.reject('LOGGED_IN');
-                    };
-                }
-              }
-    })    
-    .state(
-        'signin', {
-            url:'/signin',
-            template: '<login></login>',
-            resolve: {
-                currentUser($q, $state) {
-                    if (Meteor.userId()) {
-                        return $q.reject('LOGGED_IN');
-                    } else {
-                        return $q.resolve();
-                    }
-                }
-              }
-    })
+    })        
     .state(
         'verify-email', {
             url:'/verify-email/:token',
@@ -199,40 +194,40 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider, $mdT
     //$mdThemingProvider.generateThemesOnDemand(true);
 
     $mdThemingProvider.theme('default')
-    .primaryPalette('indigo')
-    .accentPalette('blue');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Project')
-    .primaryPalette('amber')
-    .accentPalette('orange');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Admissions')
-    .primaryPalette('amber')
-    .accentPalette('orange');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Assessment')
-    .primaryPalette('light-green')
-    .accentPalette('lime');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Classroom')
-    .primaryPalette('light-blue')
+    .primaryPalette('deep-purple')
     .accentPalette('indigo');
 
     $mdThemingProvider.theme('Collect')
-    .primaryPalette('red')
-    .accentPalette('pink');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Rapido')
-    .primaryPalette('orange')
-    .accentPalette('amber');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Scheduler')
-    .primaryPalette('yellow')
-    .accentPalette('orange');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.theme('Dashboard')
-    .primaryPalette('indigo')
-    .accentPalette('blue');
+    .primaryPalette('deep-purple')
+    .accentPalette('indigo');
 
     $mdThemingProvider.alwaysWatchTheme(true);
 
